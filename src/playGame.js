@@ -6,15 +6,16 @@ const { nextPlayerGen } = require('./nextPlayer');
 const playGame = (players) => {
   currentPlayer = 0;
 
-  const nextPlayer = nextPlayerGen(players.length());
+  const nextPlayer = nextPlayerGen(players.length);
 
-  score = pipe(
-    players.map((p) => [p, 501]),
-    _.fromPairs
-  );
+  score = pipe(() => players.map((p) => [p, 501]), _.fromPairs)();
+
+  console.log(score);
 
   while (!isGameOver(score, currentPlayer)) {
     /* Game logic */
+
+    //
     currentPlayer = nextPlayer.next().value;
   }
 };

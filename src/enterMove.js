@@ -30,8 +30,8 @@ const getScore = (total_score) => compose(Math.abs, _.sum)(total_score);
  * @param  {String} currentPlayer The name of the current player
  * @return {Function} Function with the 'score' closure to get the new score
  */
-const enterMove = (currentPlayer) => {
-  let score = 501;
+const enterMove = (initScore) => {
+  let score = initScore;
 
   /**
    * Calculate the new score of the player
@@ -44,7 +44,7 @@ const enterMove = (currentPlayer) => {
   // Quizas puedo hacer el currying con el score!!!!
   const newScore = (move) => {
     score = getScore(move.map(scoreCalculator).concat([score]));
-    return score
+    return score;
   };
   return newScore;
 };
@@ -53,5 +53,5 @@ const enterMove = (currentPlayer) => {
 let manuMove = enterMove('Manuel');
 console.log(manuMove(['DB', [3, 20], [3, 19]]));
 console.log(manuMove(['DB', [3, 20], [3, 19]]));
-console.log(manuMove(['SB', [2,20], [3,20]]));
-console.log(manuMove(['SB', [2,20], [3,20]]));
+console.log(manuMove(['SB', [2, 20], [3, 20]]));
+console.log(manuMove(['SB', [2, 20], [3, 20]]));
