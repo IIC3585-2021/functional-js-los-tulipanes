@@ -1,23 +1,26 @@
 const _ = require('lodash');
 const { pipe } = require('./pipe');
-const { isGameOver } = require('./isGameOver');
 const { nextPlayerGen } = require('./nextPlayer');
+const { askForMove } = require('./askForMove');
+const { enterMove } = require('./enterMove');
 
 const playGame = (players) => {
-  currentPlayer = 0;
-
   const nextPlayer = nextPlayerGen(players.length);
+  currentPlayer = nextPlayer.next().value;
 
-  score = pipe(() => players.map((p) => [p, 501]), _.fromPairs)();
+  scores = pipe(() => players.map((p) => [p, enterMove(501)]), _.fromPairs)(); // {nombre: puntaje}
 
-  console.log(score);
+  console.log(scores);
 
-  while (!isGameOver(score, currentPlayer)) {
-    /* Game logic */
-
-    //
+  while (true) {
+    // Game logic
+    let player = players[currentPlayer];
+    let play = scores[player];
+    if (!askForMove(play, player)) break;
     currentPlayer = nextPlayer.next().value;
   }
+
+  console.log(`Ganó ${players[currentPlayer]}!`);
 };
 
 module.exports = { playGame };

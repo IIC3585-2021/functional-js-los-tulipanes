@@ -44,14 +44,17 @@ const enterMove = (initScore) => {
   // Quizas puedo hacer el currying con el score!!!!
   const newScore = (move) => {
     score = getScore(move.map(scoreCalculator).concat([score]));
+    console.log(score);
     return score;
   };
   return newScore;
 };
 
 // Tests
-let manuMove = enterMove('Manuel');
-console.log(manuMove(['DB', [3, 20], [3, 19]]));
-console.log(manuMove(['DB', [3, 20], [3, 19]]));
-console.log(manuMove(['SB', [2, 20], [3, 20]]));
-console.log(manuMove(['SB', [2, 20], [3, 20]]));
+// let manuMove = enterMove('Manuel');
+// console.log(manuMove(["DB", [3, 20], [3, 19]]));
+// console.log(manuMove(["DB", [3, 20], [3, 19]]));
+// console.log(manuMove(["SB", [2, 20], [3, 20]]));
+// console.log(manuMove(["SB", [2, 20], [3, 20]]));
+
+module.exports = { enterMove };

@@ -1,3 +1,3 @@
 const { playGame } = require('./src/playGame');
-
-playGame(['Jose', 'Cristobal']);
+const prompt = require('prompt-sync')({ sigint: true });
+playGame(prompt('Ingresar Jugadores separados por coma: ').split(','));
