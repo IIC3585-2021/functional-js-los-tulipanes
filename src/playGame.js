@@ -6,19 +6,19 @@ const { enterMove } = require('./enterMove');
 
 const playGame = (players) => {
   const nextPlayer = nextPlayerGen(players.length);
-  currentPlayer = nextPlayer.next().value;
 
   scores = pipe(() => players.map((p) => [p, enterMove(501)]), _.fromPairs)(); // {nombre: puntaje}
 
-  console.log(scores);
+  let lastScore = -1;
 
-  while (true) {
-    // Game logic
+  while (lastScore !== 0) {
+    currentPlayer = nextPlayer.next().value;
+
     let player = players[currentPlayer];
     let play = scores[player];
-    let move = askForMove(play);
-    if (!play(move)) break;
-    currentPlayer = nextPlayer.next().value;
+    let move = askForMove(player);
+
+    lastScore = play(move);
   }
 
   console.log(`Ganó ${players[currentPlayer]}!`);
