@@ -16,7 +16,8 @@ const playGame = (players) => {
     // Game logic
     let player = players[currentPlayer];
     let play = scores[player];
-    if (!askForMove(play, player)) break;
+    let move = askForMove(play);
+    if (!play(move)) break;
     currentPlayer = nextPlayer.next().value;
   }
 
